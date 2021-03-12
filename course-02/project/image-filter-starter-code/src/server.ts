@@ -17,24 +17,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // GET /filteredimage?image_url={{URL}}
   app.get("/filteredimage/", async (req, res) => {
     const image_url = req.query.image_url;
-
-    if (!image_url) {
-      return res.status(400).send("missing image");
-    }
-    try {
-      const filteredImage = await filterImageFromURL(image_url);
-      return res.status(200).sendFile(filteredImage, () => deleteLocalFiles([filteredImage]));
-    } 
-    catch (err) {
-      return res.status(422).send("error during processing");
-    }
-  }
-  );
-  
-  // endpoint to filter an image from a public url.
-  app.get("/filteredimage/", async (req, res) => {
-    const image_url = req.query.image_url;
-
+    
     if (!image_url) {
       return res.status(400).send("missing image");
     }
